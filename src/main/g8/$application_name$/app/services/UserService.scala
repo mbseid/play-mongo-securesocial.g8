@@ -29,13 +29,8 @@ class UserService(application: Application) extends UserServicePlugin(applicatio
    */
   def findByEmailAndProvider(email: String, providerId: String):Option[Identity] =
   {
-    val user = User.findOneByEmailAndProvider(email, providerId)
-    if(user.isDefined){
-      Logger.debug("User is found")
-    }else{
-      Logger.debug(s"User isn't found with email ${email} and providerId ${providerId}")
-    }
-    user
+  	User.findOneByEmailAndProvider(email, providerId)
+
   }
 
   /**
