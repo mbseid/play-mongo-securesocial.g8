@@ -1,1 +1,0 @@
-// give the user a nice default project!
