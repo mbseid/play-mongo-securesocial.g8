@@ -37,7 +37,7 @@ object TokenDAO extends ModelCompanion[Token, String] {
   def findToken(uuid:String):Option[Token] = dao.findOne(MongoDBObject("uuid" -> uuid))
   def deleteExpiredTokens() {
     val now = new _root_.java.util.Date()
-    dao.find("expirationTime" $lte now).foreach(
+    dao.find("expirationTime" \$lte now).foreach(
       TokenDAO.remove(_)
     )
   }
