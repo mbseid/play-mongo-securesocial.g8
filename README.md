@@ -19,3 +19,19 @@ To create a new project:
 
 It will prompt you for some information.  After you will have you persoanlized project.
 Please update conf/securesocial.conf and conf/mongo.conf to finish your instalation.
+
+##Play Form Mappings
+There is now a mapping for ObjectIds.  This will significitaly simply your code, allowing for ObjectId to be parsed and valided on form binding.  
+
+```
+import import utils.formaters.ObjectIdFormatter._
+
+val form = Form(
+	Mapping(
+	"id" -> objectId,
+	"name" -> text,
+	"list" -> list(objectId)
+	)
+)
+
+```
