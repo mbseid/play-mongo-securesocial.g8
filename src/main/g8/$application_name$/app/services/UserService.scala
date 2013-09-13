@@ -39,9 +39,25 @@ class UserService(application: Application) extends UserServicePlugin(applicatio
    * @param user
    */
   def save(user: Identity) = {
-    val u = User(user)
-    User.save(u)
-    u
+	//Before saving, we should check to see if we already have them in the database.
+	//  If the user is in the database, you may want to handle login/reset differently
+    val userInDb = User.findOneBySocialId(user.id)
+    userInDb match {
+      case Some(u) =>{
+		//The user is found, return the same user
+       	// If you want to update information, feel free to do so.
+		// I just didn't want to do a bulk overwrite. May muck up information such as passwords, etc.
+		u
+		
+      }
+      case None =>{
+		//There are no users found, we should make one and save it
+        val u = User(user)
+        User.save(u)
+        u
+      }
+    }
+
   }
 
   /**
